@@ -1,6 +1,5 @@
 <?php
 $disp = 1;
-require_once ('js/recaptchalib.php');
 $name = "";
 $inquiry = "";
 if (filter_input ( INPUT_POST, 'contactus', FILTER_SANITIZE_NUMBER_INT )) {
@@ -10,13 +9,6 @@ if (filter_input ( INPUT_POST, 'contactus', FILTER_SANITIZE_NUMBER_INT )) {
 	$emtext = nl2br ( $inquiry );
 	$created = date ( "Y-m-d" );
 
-	$privatekey = "6LfTpvMSAAAAAPut6lUmyWNrAoizTcz3HZ1V-s4g";
-	$resp = recaptcha_check_answer ( $privatekey, $_SERVER ["REMOTE_ADDR"], $_POST ["recaptcha_challenge_field"], $_POST ["recaptcha_response_field"] );
-
-	if (! $resp->is_valid) {
-		echo "The reCAPTCHA wasn't entered correctly. Go back and try it again." . "(reCAPTCHA said: " . $resp->error . ")";
-		$disp = 1;
-	} else {
 		if ($email) {
 			$stmt = $db->prepare ( "INSERT INTO contact VALUES" . "(NULL,?,?,?,?,'0','0')" );
 			$stmt->execute ( array (
@@ -46,7 +38,6 @@ if (filter_input ( INPUT_POST, 'contactus', FILTER_SANITIZE_NUMBER_INT )) {
 			$disp = 1;
 		}
 	}
-}
 if ($disp == 1) {
 	echo "<form action='index.php' method='post'>
                 <table cellpadding='0' cellspacing='0' border='0'>
