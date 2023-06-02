@@ -148,7 +148,7 @@ if (filter_input(INPUT_POST, 'merchUp', FILTER_SANITIZE_STRING)) {
             $image1) : null;
     if ($width1 != null && $height1 != null) {
         $image1Type = getPicType($_FILES["image1m"]['type']);
-        processPic("$domain/merch", $image1Name . "." . $image1Type, $image1,
+        processPic("merch", $image1Name . "." . $image1Type, $image1,
                 400, 150);
         $p1stmt = $db->prepare(
                 "UPDATE merch SET merchPic1=?, merchPic1Ext=? WHERE id=?");
@@ -164,7 +164,7 @@ if (filter_input(INPUT_POST, 'merchUp', FILTER_SANITIZE_STRING)) {
             $image2) : null;
     if ($width2 != null && $height2 != null) {
         $image2Type = getPicType($_FILES["image2m"]['type']);
-        processPic("$domain/merch", $image2Name . "." . $image2Type, $image2,
+        processPic("merch", $image2Name . "." . $image2Type, $image2,
                 400, 150);
         $p2stmt = $db->prepare(
                 "UPDATE merch SET merchPic2=?, merchPic2Ext=? WHERE id=?");
